@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/demo.css";
-import { FaUserEdit } from "react-icons/fa";
 
 
 export const Demo = () => {
@@ -24,7 +23,7 @@ export const Demo = () => {
 							<p className="card-text">adress: {contact.address}</p>
 							<Link 
 								to={`/single/${contact.id}`} 
-								className="btn btn-primary"> <FaUserEdit /> Editar Contacto</Link>
+								className="btn btn-primary"> Ver Contacto</Link>
 						</div>
 					</div>
 				))}

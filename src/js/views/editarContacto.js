@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 
 
-const Formulario = () => {
+const EditarContacto = () => {
     const [contact, setContact] = useState({
         "full_name": "",
         "email": "",
@@ -14,18 +14,37 @@ const Formulario = () => {
     })
     const { store, actions } = useContext(Context);
 
+    const getContact = () => {
+		fetch(`https://playground.4geeks.com/apis/fake/contact/${params.theid}`, {
+			method: "get",
+		})
+			.then(response => response.json())
+			.then(data => setContact(data))
+			.catch(error => ('Error fetching data:', error));
+	};
+	
+	useEffect(() => {
+		getContact();
+	}, [])
 
-const newContact = (e) => {
+	const params = useParams();
+    const navigate = useNavigate ();
+
+
+const editContact = (e) => {
     e.preventDefault()
-    actions.createdContact(contact)
+    actions.editContact(contact)
     setContact({
         "full_name": "",
         "email": "",
         "agenda_slug": "agenda_kevin",
         "address": "",
-        "phone": ""
+        "phone": "",
+        "id": params.theid
     });
     navigate("/demo");
+    actions.loadAgendaData()
+    
 
 }
 
@@ -33,7 +52,7 @@ const newContact = (e) => {
 
     return (
         <div>
-            <form onSubmit={newContact}>
+            <form onSubmit={editContact}>
                 <div className="mb-3">
                     <label className="form-label">Full name</label>
                     <input 
@@ -78,13 +97,13 @@ const newContact = (e) => {
                         value={contact.address} 
                     />
                 </div>
-                <button type='submit' className="btn btn-success m-3">guardar contacto</button>
+                <button type='submit' className="btn btn-warning m-3">guardar contacto</button>
             </form>
             <Link to="/demo">
-				<button className="btn btn-danger m-3">ver contactos</button>
+				<button className="btn btn-danger mx-3">volver a la agenda</button>
 			</Link>
         </div>
     )
 }
 
-export default Formulario
+export default EditarContacto
