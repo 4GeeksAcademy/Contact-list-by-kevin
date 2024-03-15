@@ -20,15 +20,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			loadSomeData: () => {
+			loadAgendaData: () => {
 				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/agenda_kevin")
-				.then(response => response.json())
-				.then(response => setStore({agenda:response})) 
+					.then(response => response.json())
+					.then(response => setStore({ agenda: response }))
 				/**
 				
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
 			},
+			// AGREGAR POST para crear un nuevo contacto, tiene que tener logica para escuchar los datos de un formulario// 
+
+			//(ESTE ES MI POST, FALTA RELLEAR)/////
+
+			createdContact: (contact) => {
+				fetch("https://playground.4geeks.com/apis/fake/contact", {
+					method: "POST",
+					body: JSON.stringify(contact),
+					headers: {
+						"content-type": "application/json",
+					},
+				})
+					.then(response => response.json())
+					.then(data => console.log(data))
+					.catch(error => ('Error fetching data:', error));
+			},
+
+
+			
+
+
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

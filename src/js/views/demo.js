@@ -1,27 +1,41 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { Context } from "../store/appContext";
-
 import "../../styles/demo.css";
+import { FaUserEdit } from "react-icons/fa";
+
 
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
-console.log(store.agenda);
+
+	useEffect(() => {
+		actions.loadAgendaData()
+	}, [])
+
 	return (
-		<div className="container">
-			<ul className="list-group">
-				{store.agenda.map((contacto) => (
-					<div key= {contacto.id}>
-					<li>{contacto.full_name}</li>
-					<li>{contacto.email}</li>
+		<div className="container mt-5">
+			<div className="row">
+				{store.agenda.map((contact) => (
+					<div key={contact.id} className="col-md-12 mb-4 bg-secondary bg-opacity-25">
+						<div className="card-body">
+							<h5 className="card-title">{contact.full_name}</h5>
+							<p className="card-text">Email: {contact.email}</p>
+							<p className="card-text">Phone: {contact.phone}</p>
+							<p className="card-text">adress: {contact.address}</p>
+							<Link 
+								to={`/single/${contact.id}`} 
+								className="btn btn-primary"> <FaUserEdit /> Editar Contacto</Link>
+						</div>
 					</div>
 				))}
-			</ul>
-			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
+				<br />
+				<Link to="/">
+					<button className="btn btn-primary col-2">Back home</button>
+				</Link>
+				<Link to="/formulario">
+					<button className="btn btn-success mt-2 col-2">crear contacto</button>
+				</Link>
+			</div>
 		</div>
 	);
 };
