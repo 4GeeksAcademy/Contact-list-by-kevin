@@ -16,23 +16,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			agenda: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
+			
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+
+			//Mi GET//
 			loadAgendaData: () => {
 				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/agenda_kevin")
 					.then(response => response.json())
 					.then(response => setStore({ agenda: response }))
-				/**
-				
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
 			},
-			// AGREGAR POST para crear un nuevo contacto, tiene que tener logica para escuchar los datos de un formulario// 
 
-			//(ESTE ES MI POST, FALTA RELLEAR)/////
-
+            //Mi POST//
 			createdContact: (contact) => {
 				fetch("https://playground.4geeks.com/apis/fake/contact", {
 					method: "POST",
@@ -46,6 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => ('Error fetching data:', error));
 			},
 
+			//Mi PUT//
 			editContact: (contact) => {
 				fetch(`https://playground.4geeks.com/apis/fake/contact/${contact.id}`, {
 					method: "PUT",
@@ -59,6 +56,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => ('Error fetching data:', error));
 			},
 
+			//Mi DELETE//
+			deleteContact: (id) => {
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`,{
+					method: "DELETE",
+				})
+				.then(response => response.json())
+				.then(data => console.log(data))
+				.catch(error => ('error fetching data:', error));
+			},
 			
 
 

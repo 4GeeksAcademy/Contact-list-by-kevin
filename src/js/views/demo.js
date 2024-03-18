@@ -21,20 +21,21 @@ export const Demo = () => {
 							<p className="card-text">Email: {contact.email}</p>
 							<p className="card-text">Phone: {contact.phone}</p>
 							<p className="card-text">adress: {contact.address}</p>
-							<Link 
-								to={`/single/${contact.id}`} 
+							<Link
+								to={`/single/${contact.id}`}
 								className="btn btn-primary"> Ver Contacto</Link>
 						</div>
 					</div>
 				))}
-				<br />
-				<Link to="/">
-					<button className="btn btn-primary col-2">Back home</button>
-				</Link>
-				<Link to="/formulario">
-					<button className="btn btn-success mt-2 col-2">crear contacto</button>
-				</Link>
 			</div>
+			<br />
+			<Link to="/">
+				<button className="btn btn-primary m-3">Back home</button>
+			</Link>
+			<Link to="/formulario">
+				<button className="btn btn-success m-3">crear contacto</button>
+			</Link>
+
 		</div>
 	);
 };
