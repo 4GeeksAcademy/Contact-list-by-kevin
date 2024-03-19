@@ -55,7 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => console.log(data))
 					.catch(error => ('Error fetching data:', error));
 			},
-
+			
 			//Mi DELETE//
 			deleteContact: (id) => {
 				fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`,{
