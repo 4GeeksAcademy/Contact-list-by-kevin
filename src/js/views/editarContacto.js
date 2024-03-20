@@ -16,7 +16,7 @@ const EditarContacto = () => {
 
     const getContact = () => {
 		fetch(`https://playground.4geeks.com/apis/fake/contact/${params.theid}`, {
-			method: "get",
+			method: "GET",
 		})
 			.then(response => response.json())
 			.then(data => setContact(data))
